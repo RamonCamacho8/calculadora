@@ -1,4 +1,4 @@
-ddef restar(x: float, y: float) -> float:
+def restar(x: float, y: float) -> float:
     """
     Calcula la resta de dos números.
 
