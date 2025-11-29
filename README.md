@@ -7,7 +7,7 @@ multiplicacion, division) - `src/main.py`: demo que usa las operaciones - `tests
 ## Cómo ejecutar 
 1. Clona el repositorio: 
 ```bash 
-git clone git@github.com:TU_USUARIO/calculadora.git 
+git clone git@github.com:RamonCamacho8/calculadora.git 
 cd calculadora 
 3. Ejecuta la demo: 
 python src/main.py 
