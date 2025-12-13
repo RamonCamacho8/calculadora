@@ -11,7 +11,7 @@ def obtener_datos_prueba():
         (0, 5, 0),
         (4, 0.5, 2.0),
     ]
-    
+
 
 @pytest.mark.parametrize("a, e, resultado_esperado", obtener_datos_prueba())
 def test_potencia(a, e, resultado_esperado):
