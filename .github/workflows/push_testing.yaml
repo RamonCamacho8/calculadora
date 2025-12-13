@@ -1,0 +1,37 @@
+# This is a basic workflow to help you implement flake8, tool that will help you to
+# check your code base against coding style (PEP8), programming errors 
+# (like “library imported but unused” and “Undefined name”) and to check cyclomatic complexity.
+name: Pytest para push en ramas de features
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ feature/* ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  pytest:
+    runs-on: ubuntu-latest 
+    timeout-minutes: 10
+
+    name: Pytest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install pytest
+        if [ -f ejemplo/requirements.txt ]; then pip install -r ejemplo/requirements.txt; fi
+    
+    - name: Pruebas con pytest
+      run: |
+        pytest tests/ -v
