@@ -24,7 +24,7 @@ def formula_general(a: float, b: float, c: float) -> tuple:
                          )
 
     discriminante = restar(potencia(b, 2), multiplicar(4, multiplicar(a, c)))
-    
+
     if discriminante < 0:
         raise ValueError("La ecuación no tiene soluciones reales.")
 
