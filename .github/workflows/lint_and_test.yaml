@@ -1,7 +1,7 @@
 # This is a basic workflow to help you implement flake8, tool that will help you to
 # check your code base against coding style (PEP8), programming errors 
 # (like “library imported but unused” and “Undefined name”) and to check cyclomatic complexity.
-name: flake8 Lint + Pytest
+name: CI/CD
 
 # Controls when the workflow will run
 on:
@@ -65,3 +65,30 @@ jobs:
     - name: Test with pytest
       run: |
         pytest tests/ -v
+
+  build-and-push:
+    needs: pytest
+    runs-on: ubuntu-latest
+    name: Build & Push Docker Image
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          tags: |
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ github.sha }}
