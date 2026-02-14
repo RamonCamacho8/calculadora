@@ -1,7 +1,7 @@
 # This is a basic workflow to help you implement flake8, tool that will help you to
 # check your code base against coding style (PEP8), programming errors 
 # (like “library imported but unused” and “Undefined name”) and to check cyclomatic complexity.
-name: flake8 Lint + Pytest
+name: CI/CD
 
 # Controls when the workflow will run
 on:
